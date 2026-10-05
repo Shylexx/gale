@@ -1,25 +1,19 @@
+@tool
 extends EditorProperty
 
 var play_button: Button = Button.new()
-var stop_button: Button = Button.new()
 var current_cue: AudioCue
 
 func _init() -> void:
-	play_button.text = "▶ Play Event"
+	play_button.text = "▶ Play Cue"
 	play_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	play_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	
-	stop_button.text = "■ Stop Event"
-	stop_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
-	stop_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	
 	add_child(play_button)
-	add_child(stop_button)
-	set_bottom_editor(stop_button)
+	set_bottom_editor(play_button)
 	
 	play_button.pressed.connect(_on_play_pressed)
-	stop_button.pressed.connect(_on_stop_pressed)
-
+	
 func _update_property() -> void:
 	current_cue = get_edited_object() as AudioCue
 	
@@ -59,6 +53,3 @@ func _on_play_pressed() -> void:
 	)
 	
 	preview_player.play()
-	
-func _on_stop_pressed() -> void:
-	pass
